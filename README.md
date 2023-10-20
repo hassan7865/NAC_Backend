@@ -19,6 +19,12 @@ Welcome to the GitHub repository for the backend of the Ned Admission Cell proje
 - **API Endpoints**: Define API endpoints for various operations, including user management and data retrieval.
 
 - **CORS Support**: Enable Cross-Origin Resource Sharing (CORS) to allow frontend and backend communication.
+  
+## Deployment (Backend)
+
+The backend of this project is deployed to Cyclic.
+
+![Cyclic](https://img.shields.io/badge/-Cyclic.sh-2B2D3E?style=flat&logo=cyclic&logoColor=white)
 
 ## Installation
 
