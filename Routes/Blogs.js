@@ -3,7 +3,7 @@ const ApprovedBlog = require("../Models/ApprovedBlogs")
 const verify = require("./verifyToken")
 const router = require('express').Router()
 
-router.post("/pendBlog",verify,async(req,res)=>{
+router.post("/pendBlog",async(req,res)=>{
     try{
         const pendBlog = new PendingBlogs(req.body)
         const savedPendBlog = await pendBlog.save()
