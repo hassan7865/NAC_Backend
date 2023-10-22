@@ -16,7 +16,9 @@ app.use(express.json())
 //     origin:"*",
 //     methods:["GET","POST","PUT","DELETE"]
 // }))
-app.use(cors());
+app.use(cors({
+    origin:"*"
+}));
 const connect = ()=>{
     mongoose.connect(process.env.MONGOURL).
     then(()=>console.log("Db Connection Successfull"))
