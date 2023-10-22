@@ -3,7 +3,7 @@ const ApprovedBlog = require("../Models/ApprovedBlogs")
 const verify = require("./verifyToken")
 const router = require('express').Router()
 
-router.post("/pendBlog",verify,async(req,res)=>{
+router.post("/pendBlog",async(req,res)=>{
     try{
         const pendBlog = new PendingBlogs(req.body)
         const savedPendBlog = await pendBlog.save()
@@ -55,9 +55,9 @@ router.delete("/appBlog/:id",verify,async(req,res)=>{
     }
 
 })
-router.get("/appBlog/:name",async(req,res)=>{
+router.get("/appBlog/:id/:name",async(req,res)=>{
     try{
-      const appBlog =   await ApprovedBlog.find({title:req.params.name})
+      const appBlog =   await ApprovedBlog.findById(req.params.id)
       res.status(200).json(appBlog)
     }catch(err){
         res.status(500).json(err)
