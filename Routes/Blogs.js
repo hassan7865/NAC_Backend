@@ -21,9 +21,9 @@ router.delete("/pendBlog/:id",verify,async(req,res)=>{
     }
 
 })
-router.get("/pendBlog/:name",async(req,res)=>{
+router.get("/pendBlog/:id/:name",async(req,res)=>{
     try{
-      const pendBlog =   await PendingBlogs.find({title:req.params.name})
+      const pendBlog =   await PendingBlogs.findById(req.params.id)
       res.status(200).json(pendBlog)
     }catch(err){
         res.status(500).json(err)
