@@ -12,19 +12,10 @@ const cors = require("cors")
 dotenv.config()
 const app = express()
 app.use(express.json())
-const allowedOrigins = ["http://localhost:5173", "https://another-allowed-domain.com"];
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
-
+    origin: '*',
+    methods:["GET","POST","PUT","DELETE"]
+}))
 const connect = ()=>{
     mongoose.connect(process.env.MONGOURL).
     then(()=>console.log("Db Connection Successfull"))
