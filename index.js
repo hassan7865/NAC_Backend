@@ -23,6 +23,8 @@ const connect = ()=>{
         throw err
     })
 }
+
+connect()
 app.use("/api/faq",FaqRoute)
 app.use("/api/test",TestRoute)
 app.use("/api/pastpapers",PastPapersRoute)
@@ -30,7 +32,10 @@ app.use("/api/news",NewsRoute)
 app.use("/api/auth",Login)
 app.use("/api/blog",PendingBlogs)
 app.use("/api/Count",TotalCount)
+app.get('/',(req,res)=>{
+    res.send("test")
+})
 app.listen(process.env.PORT,()=>{
-    connect()
+   
     console.log(`Server Started at Port ${process.env.PORT}`)
 })
