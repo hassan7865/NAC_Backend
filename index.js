@@ -32,9 +32,48 @@ app.use("/api/news",NewsRoute)
 app.use("/api/auth",Login)
 app.use("/api/blog",PendingBlogs)
 app.use("/api/Count",TotalCount)
-app.get('/',(req,res)=>{
-    res.send("test")
-})
+
+app.post('/api', (req, res) => {
+  const ip =
+    req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
+  const { referrer, location, userAgent } = req.body;
+
+  let searchKeyword = null;
+
+  if (referrer) {
+    const url = new URL(referrer);
+    const hostname = url.hostname;
+    const params = url.searchParams;
+
+    if (hostname.includes('google.')) {
+      searchKeyword = params.get('q');
+    } else if (hostname.includes('bing.com')) {
+      searchKeyword = params.get('q');
+    } else if (hostname.includes('yahoo.com')) {
+      searchKeyword = params.get('p');
+    } else if (hostname.includes('duckduckgo.com')) {
+      searchKeyword = params.get('q');
+    } else if (hostname.includes('yandex.')) {
+      searchKeyword = params.get('text');
+    } else if (hostname.includes('baidu.com')) {
+      searchKeyword = params.get('wd');
+    }
+  }
+
+  const visitData = {
+    ip,
+    referrer,
+    searchKeyword: searchKeyword ? decodeURIComponent(searchKeyword) : null,
+    page: location,
+    userAgent,
+    timestamp: new Date()
+  };
+
+  console.log('Visit:', visitData);
+  // Save to database here
+
+  res.sendStatus(200);
+});
 app.listen(process.env.PORT,()=>{
    
     console.log(`Server Started at Port ${process.env.PORT}`)
