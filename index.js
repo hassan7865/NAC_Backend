@@ -33,7 +33,7 @@ app.use("/api/auth",Login)
 app.use("/api/blog",PendingBlogs)
 app.use("/api/Count",TotalCount)
 
-app.post('/api', (req, res) => {
+app.post('/api/track-visit', (req, res) => {
   const ip =
     req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
   const { referrer, location, userAgent } = req.body;
